@@ -94,11 +94,11 @@ namespace CursorTool
             {
                 if (en_language)
                 {
-                    lackLabel.Text = "You Lack";
+                    lackLabel.Text = "You Lack:"+lackNumber;
                 }
                 else
                 {
-                    lackLabel.Text = "您缺少";
+                    lackLabel.Text = "您缺少:" + lackNumber;
                 }
             }
 
@@ -119,6 +119,7 @@ namespace CursorTool
             en_language = true;
             englishToolStripMenuItem.Text = "English  √";
             中文ToolStripMenuItem.Text = "中文";
+            SwitchLanguage();
         }
 
         private void 中文ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,6 +127,7 @@ namespace CursorTool
             en_language = false;
             englishToolStripMenuItem.Text = "English";
             中文ToolStripMenuItem.Text = "中文   √";
+            SwitchLanguage();
         }
         public void SwitchLanguage()
         {
@@ -133,11 +135,39 @@ namespace CursorTool
             {
                 startToolStripMenuItem.Text = "Start";
                 selectFolderToolStripMenuItem.Text = "Select Folder";
-                languageToolStripMenuItem.Text = "语言";
+                languageToolStripMenuItem.Text = "Language";
+                if (!lackLabel.Text.StartsWith('C') || !lackLabel.Text.StartsWith('Y'))
+                {
+                    if (lackLabel.Text.StartsWith('恭'))
+                    {
+                        lackLabel.Text = "Congratulations, you can generate inf now!";
+                    }
+                    else
+                    {
+                        lackLabel.Text = "You Lack:" + lackNumber;
+                    }
+
+                }
+                
+
             }
             else
             {
+                startToolStripMenuItem.Text = "开始";
+                selectFolderToolStripMenuItem.Text = "选择文件夹";
+                languageToolStripMenuItem.Text = "语言";
+                if (lackLabel.Text.StartsWith('C') || lackLabel.Text.StartsWith('Y'))
+                {
+                    if (lackLabel.Text.StartsWith('C'))
+                    {
+                        lackLabel.Text = "恭喜你，现在可以进行生成inf";
+                    }
+                    else
+                    {
+                        lackLabel.Text = "您缺少:" + lackNumber;
+                    }
 
+                }
             }
         }
     }

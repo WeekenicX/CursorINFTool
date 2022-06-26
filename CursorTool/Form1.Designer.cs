@@ -32,10 +32,10 @@
             this.lackLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.中文ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,11 +53,11 @@
             // 
             this.lackLabel.AutoSize = true;
             this.lackLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lackLabel.Location = new System.Drawing.Point(37, 59);
+            this.lackLabel.Location = new System.Drawing.Point(37, 58);
             this.lackLabel.Name = "lackLabel";
-            this.lackLabel.Size = new System.Drawing.Size(69, 27);
+            this.lackLabel.Size = new System.Drawing.Size(103, 27);
             this.lackLabel.TabIndex = 1;
-            this.lackLabel.Text = "label1";
+            this.lackLabel.Text = "No Select";
             // 
             // menuStrip1
             // 
@@ -81,6 +81,13 @@
             this.startToolStripMenuItem.Size = new System.Drawing.Size(92, 40);
             this.startToolStripMenuItem.Text = "Start";
             // 
+            // selectFolderToolStripMenuItem
+            // 
+            this.selectFolderToolStripMenuItem.Name = "selectFolderToolStripMenuItem";
+            this.selectFolderToolStripMenuItem.Size = new System.Drawing.Size(221, 32);
+            this.selectFolderToolStripMenuItem.Text = "Select Folder";
+            this.selectFolderToolStripMenuItem.Click += new System.EventHandler(this.selectFolderToolStripMenuItem_Click);
+            // 
             // languageToolStripMenuItem
             // 
             this.languageToolStripMenuItem.AutoSize = false;
@@ -95,23 +102,16 @@
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(197, 32);
             this.englishToolStripMenuItem.Text = "English   √";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
             // 中文ToolStripMenuItem
             // 
             this.中文ToolStripMenuItem.Name = "中文ToolStripMenuItem";
-            this.中文ToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
+            this.中文ToolStripMenuItem.Size = new System.Drawing.Size(197, 32);
             this.中文ToolStripMenuItem.Text = "中文";
             this.中文ToolStripMenuItem.Click += new System.EventHandler(this.中文ToolStripMenuItem_Click);
-            // 
-            // selectFolderToolStripMenuItem
-            // 
-            this.selectFolderToolStripMenuItem.Name = "selectFolderToolStripMenuItem";
-            this.selectFolderToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
-            this.selectFolderToolStripMenuItem.Text = "Select Folder";
-            this.selectFolderToolStripMenuItem.Click += new System.EventHandler(this.selectFolderToolStripMenuItem_Click);
             // 
             // Form1
             // 
