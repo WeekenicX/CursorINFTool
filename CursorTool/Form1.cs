@@ -5,9 +5,9 @@ namespace CursorTool
     public partial class Form1 : Form
     {
         public string[] allFile;
-        public static ArrayList FileArrayList = new ArrayList();
+        public  ArrayList FileArrayList = new ArrayList();
         public int lackNumber;
-        public bool en_language;
+        public bool en_language = true;
         public string[] allCursor = new string[]
         {
             "alt",
@@ -49,20 +49,32 @@ namespace CursorTool
             {
                 if (allFile[i].EndsWith("ani") || allFile[i].EndsWith("cur"))
                 {
-                    FileArrayList.Add(allFile[i]);
-                    for (int j = 0; j < allCursor.Length; j++)
+                    if (allFile[i].EndsWith("ani"))
                     {
-                        if (allFile[i].Substring(allFile[i].LastIndexOf("\\") + 1).Contains(allCursor[j]))
+                        allFile[i] = allFile[i].Replace(".ani", " ");
+                    }
+                    else
+                    {
+                        allFile[i] = allFile[i].Replace(".cur", " ");
+                    }
+                    allFile[i] = allFile[i].Trim();
+                    FileArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));        
+                }
+            }
+            for ( int j = 0; j < allCursor.Length; j++)
+            {
+                for (int i = 0; i < FileArrayList.Count; i++)
+                {
+                    if (allCursor[j].Contains(FileArrayList[i].ToString()))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        if (i == FileArrayList.Count - 1)
                         {
-                            break;
-                        }
-                        else
-                        {
-                            if (j == allCursor.Length - 1)
-                            {
-                                lackNumber++;
-                                listBox1.Items.Add(allFile[i].Substring(allFile[i].LastIndexOf("\\") + 1));
-                            }
+                            lackNumber++;
+                            listBox1.Items.Add(allCursor[j]);
                         }
                     }
                 }
@@ -76,6 +88,17 @@ namespace CursorTool
                 else
                 {
                     lackLabel.Text = "恭喜你，现在可以进行生成inf";
+                }
+            }
+            else
+            {
+                if (en_language)
+                {
+                    lackLabel.Text = "You Lack";
+                }
+                else
+                {
+                    lackLabel.Text = "您缺少";
                 }
             }
 
@@ -103,6 +126,19 @@ namespace CursorTool
             en_language = false;
             englishToolStripMenuItem.Text = "English";
             中文ToolStripMenuItem.Text = "中文   √";
+        }
+        public void SwitchLanguage()
+        {
+            if (en_language)
+            {
+                startToolStripMenuItem.Text = "Start";
+                selectFolderToolStripMenuItem.Text = "Select Folder";
+                languageToolStripMenuItem.Text = "语言";
+            }
+            else
+            {
+
+            }
         }
     }
 }
