@@ -5,23 +5,27 @@ namespace CursorTool
     public partial class Form1 : Form
     {
         public string[] allFile;
-        public  ArrayList FileArrayList = new ArrayList();
+        public ArrayList cursorArrayList = new ArrayList();
+        public ArrayList FileArrayList = new ArrayList();
         public int lackNumber;
         public bool en_language = true;
+        public string folderPath;
+        public string basePath = "base.txt";
+        public string[] baseTxt;
         public string[] allCursor = new string[]
         {
-            "alt",
+            "alternate",
             "busy",
             "cross",
-            "diag1",
-            "diag2",
+            "dgn1",
+            "dgn2",
             "handwriting",
             "help",
-            "horiz",
+            "horz",
             "link",
             "loc",
             "move",
-            "normal",
+            "pointer",
             "person",
             "text",
             "unavailable",
@@ -37,13 +41,24 @@ namespace CursorTool
         {
 
         }
+        //Find cursor you lack
         public void CheckFile(string path)
         {
 
             allFile = System.IO.Directory.GetFileSystemEntries(path);
+            //Reset number
             if (FileArrayList != null)
             {
                 FileArrayList.Clear();
+            }
+            listBox1.Items.Clear();
+            lackNumber = 0;
+            for (int i = 0; i < allFile.Length; i++)
+            {
+                if (allFile[i].EndsWith("ani") || allFile[i].EndsWith("cur"))
+                {
+                    cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
+                }
             }
             for (int i = 0; i < allFile.Length; i++)
             {
@@ -58,10 +73,10 @@ namespace CursorTool
                         allFile[i] = allFile[i].Replace(".cur", " ");
                     }
                     allFile[i] = allFile[i].Trim();
-                    FileArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));        
+                    FileArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
                 }
             }
-            for ( int j = 0; j < allCursor.Length; j++)
+            for (int j = 0; j < allCursor.Length; j++)
             {
                 for (int i = 0; i < FileArrayList.Count; i++)
                 {
@@ -94,7 +109,7 @@ namespace CursorTool
             {
                 if (en_language)
                 {
-                    lackLabel.Text = "You Lack:"+lackNumber;
+                    lackLabel.Text = "You Lack:" + lackNumber;
                 }
                 else
                 {
@@ -110,7 +125,8 @@ namespace CursorTool
             folderBrowserDialog.ShowDialog();
             if (folderBrowserDialog.SelectedPath != null)
             {
-                CheckFile(folderBrowserDialog.SelectedPath);
+                folderPath = folderBrowserDialog.SelectedPath;
+                CheckFile(folderPath);
             }
         }
 
@@ -148,7 +164,7 @@ namespace CursorTool
                     }
 
                 }
-                
+
 
             }
             else
@@ -169,6 +185,64 @@ namespace CursorTool
 
                 }
             }
+        }
+        public void ReplaceElement()
+        {
+            int elementNumber = 1;
+            int elementNumberTwo = 1;
+            string elementStringTwo = "st";
+            for (int I = 0; I < baseTxt.Length; I++)
+            {
+                if (baseTxt[I] == "element" + elementNumber)
+                {
+                    baseTxt[I] = baseTxt[I].Replace($"element{elementNumber}", cursorArrayList[elementNumber - 1].ToString());
+                    elementNumber++;
+                }
+                switch (elementNumberTwo)
+                {
+                    case 1:
+                        elementStringTwo = "st";
+                        break;
+                    case 2:
+                        elementStringTwo = "nd";
+                        break;
+                    default:
+                        elementStringTwo = "th";
+                        break;
+                }
+                if (baseTxt[I].Contains("elementName"))
+                {
+
+                }
+                if (baseTxt[I].Contains($"element{elementNumberTwo}{elementStringTwo}"))
+                {
+                    for (int C = 0; C < cursorArrayList.Count; C++)
+                    {
+                        if (cursorArrayList[C].ToString().Contains(baseTxt[I].Substring(0, baseTxt[I].IndexOf(" "))))
+                        {
+                            baseTxt[I] = baseTxt[I].Replace($"element{elementNumberTwo}{elementStringTwo}", cursorArrayList[C].ToString());
+                            elementNumberTwo++;
+                        }
+                    }
+
+                }
+
+            }
+            elementNumber = 0;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (folderPath != null)
+            {
+                CheckFile(folderPath);
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            baseTxt = File.ReadAllLines(basePath);
+            ReplaceElement();
         }
     }
 }
