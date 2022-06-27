@@ -41,7 +41,10 @@ namespace CursorTool
         {
 
         }
-        //Find cursor you lack
+        /// <summary>
+        /// Find cursor you lack
+        /// </summary>
+        /// <param name="path"></param>
         public void CheckFile(string path)
         {
 
@@ -145,6 +148,9 @@ namespace CursorTool
             中文ToolStripMenuItem.Text = "中文   √";
             SwitchLanguage();
         }
+        /// <summary>
+        /// Switch Language
+        /// </summary>
         public void SwitchLanguage()
         {
             if (en_language)
@@ -186,6 +192,9 @@ namespace CursorTool
                 }
             }
         }
+        /// <summary>
+        /// Replace Element
+        /// </summary>
         public void ReplaceElement()
         {
             int elementNumber = 1;
@@ -212,7 +221,19 @@ namespace CursorTool
                 }
                 if (baseTxt[I].Contains("elementName"))
                 {
-
+                    if (textBoxTheme.Text == String.Empty)
+                    {
+                        if (en_language)
+                        {
+                            MessageBox.Show("The pointer subject name is not filled in, and the default is MyCursor");
+                        }
+                        else
+                        {
+                            MessageBox.Show("未填写主题名称，默认将为MyCursor");
+                        }
+                        textBoxTheme.Text = "MyCursor";
+                    }
+                    baseTxt[I] = baseTxt[I].Replace("elementName", textBoxTheme.Text);
                 }
                 if (baseTxt[I].Contains($"element{elementNumberTwo}{elementStringTwo}"))
                 {
@@ -241,8 +262,25 @@ namespace CursorTool
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            if (folderPath == null)
+            {
+                return;
+            }
             baseTxt = File.ReadAllLines(basePath);
             ReplaceElement();
+            CreateInfFile();
+        }
+        public void CreateInfFile()
+        {
+            System.IO.File.WriteAllLines($"{folderPath}\\this.inf", baseTxt);
+            if (en_language)
+            {
+                MessageBox.Show("Sucess！");
+            }
+            else
+            {
+                MessageBox.Show("成功");
+            }
         }
     }
 }

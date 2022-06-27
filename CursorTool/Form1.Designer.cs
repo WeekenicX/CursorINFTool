@@ -39,6 +39,8 @@
             this.中文ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBoxTheme = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,10 +111,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // textBoxTheme
+            // 
+            resources.ApplyResources(this.textBoxTheme, "textBoxTheme");
+            this.textBoxTheme.Name = "textBoxTheme";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxTheme);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lackLabel);
@@ -140,5 +154,7 @@
         private ToolStripMenuItem 中文ToolStripMenuItem;
         private Button button1;
         private Button button2;
+        private TextBox textBoxTheme;
+        private Label label1;
     }
 }
