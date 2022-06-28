@@ -38,9 +38,9 @@
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.中文ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonMake = new System.Windows.Forms.Button();
             this.textBoxTheme = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelTheme = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +49,7 @@
             resources.ApplyResources(this.listBox1, "listBox1");
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Name = "listBox1";
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // lackLabel
             // 
@@ -104,30 +105,30 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // button2
+            // buttonMake
             // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            resources.ApplyResources(this.buttonMake, "buttonMake");
+            this.buttonMake.Name = "buttonMake";
+            this.buttonMake.UseVisualStyleBackColor = true;
+            this.buttonMake.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // textBoxTheme
             // 
             resources.ApplyResources(this.textBoxTheme, "textBoxTheme");
             this.textBoxTheme.Name = "textBoxTheme";
             // 
-            // label1
+            // labelTheme
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelTheme, "labelTheme");
+            this.labelTheme.Name = "labelTheme";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelTheme);
             this.Controls.Add(this.textBoxTheme);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonMake);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lackLabel);
             this.Controls.Add(this.listBox1);
@@ -153,8 +154,8 @@
         private ToolStripMenuItem englishToolStripMenuItem;
         private ToolStripMenuItem 中文ToolStripMenuItem;
         private Button button1;
-        private Button button2;
+        private Button buttonMake;
         private TextBox textBoxTheme;
-        private Label label1;
+        private Label labelTheme;
     }
 }

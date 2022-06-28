@@ -158,6 +158,8 @@ namespace CursorTool
                 startToolStripMenuItem.Text = "Start";
                 selectFolderToolStripMenuItem.Text = "Select Folder";
                 languageToolStripMenuItem.Text = "Language";
+                labelTheme.Text = "Theme Name(English is recommended)";
+                buttonMake.Text = "Go";
                 if (!lackLabel.Text.StartsWith('C') || !lackLabel.Text.StartsWith('Y'))
                 {
                     if (lackLabel.Text.StartsWith('恭'))
@@ -178,6 +180,8 @@ namespace CursorTool
                 startToolStripMenuItem.Text = "开始";
                 selectFolderToolStripMenuItem.Text = "选择文件夹";
                 languageToolStripMenuItem.Text = "语言";
+                labelTheme.Text = "主题名称(建议为英文)";
+                buttonMake.Text = "生成";
                 if (lackLabel.Text.StartsWith('C') || lackLabel.Text.StartsWith('Y'))
                 {
                     if (lackLabel.Text.StartsWith('C'))
@@ -243,6 +247,15 @@ namespace CursorTool
                         {
                             baseTxt[I] = baseTxt[I].Replace($"element{elementNumberTwo}{elementStringTwo}", cursorArrayList[C].ToString());
                             elementNumberTwo++;
+                            break;
+                        }
+                        else
+                        {
+                          if(C == cursorArrayList.Count - 1)
+                            {
+                                baseTxt[I] =string.Empty;
+                                elementNumberTwo++;
+                            }
                         }
                     }
 
@@ -281,6 +294,11 @@ namespace CursorTool
             {
                 MessageBox.Show("成功");
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
