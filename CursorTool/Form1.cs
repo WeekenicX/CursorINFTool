@@ -12,25 +12,26 @@ namespace CursorTool
         public string folderPath;
         public string basePath = "base.txt";
         public string[] baseTxt;
+        public ArrayList allCheckLanguageName = new ArrayList();
         public string[] allCursor = new string[]
         {
-            "alternate",
-            "busy",
-            "cross",
-            "dgn1",
-            "dgn2",
-            "handwriting",
-            "help",
-            "horz",
-            "link",
-            "loc",
-            "move",
-            "pointer",
-            "person",
-            "text",
-            "unavailable",
-            "vert",
-            "working"
+            "alternate/候选",
+            "busy/忙",
+            "cross/精准选择",
+            "dgn1/沿对角线调整大小 1",
+            "dgn2/沿对角线调整大小 2",
+            "handwriting/手写",
+            "help/帮助选择",
+            "horz/水平调整大小",
+            "link/链接选择",
+            "loc/位置大小",
+            "move/移动",
+            "pointer/正常选择",
+            "person/个人选择",
+            "text/文本选择",
+            "unavailable/不可用",
+            "vert/垂直调整大小",
+            "working/后台运行"
         };
         public Form1()
         {
@@ -60,7 +61,47 @@ namespace CursorTool
             {
                 if (allFile[i].EndsWith("ani") || allFile[i].EndsWith("cur"))
                 {
-                    cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
+                    string noNameFile = allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1).Replace(".ani", " ").ToString().Trim();
+                    if (allFile[i].EndsWith(".ani"))
+                    {
+                        for (int R = 0; R < allCursor.Length; R++)
+                        {
+                            if (allCursor[R].Contains(noNameFile))
+                            {
+                                cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
+                                break;
+                            }
+                            else
+                            {
+                                if (R == allCursor.Length - 1)
+                                {
+                                    cursorArrayList.Add(string.Empty);
+                                }
+                            }
+                        }
+                    }
+                    if (allFile[i].EndsWith(".cur"))
+                    {
+                        if (allFile[i].EndsWith(".cur"))
+                        {
+                            for (int R = 0; R < allCursor.Length; R++)
+                            {
+                                if (allCursor[R].Contains(noNameFile))
+                                {
+                                    cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
+                                    break;
+                                }
+                                else
+                                {
+                                    if (R == allCursor.Length - 1)
+                                    {
+                                        cursorArrayList.Add(string.Empty);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
             for (int i = 0; i < allFile.Length; i++)
@@ -97,6 +138,46 @@ namespace CursorTool
                     }
                 }
             }
+            if (System.IO.Directory.Exists(folderPath + "/here"))
+            {
+                System.IO.Directory.Delete(folderPath + "/here");
+            }
+            System.IO.Directory.CreateDirectory(folderPath + "/here");
+            for (int f = 0; f < cursorArrayList.Count; f++)
+            {
+                if (cursorArrayList[f] != string.Empty)
+                {
+                    if (!IsHanZi(cursorArrayList[f].ToString()[0].ToString()))
+                    {
+                        File.Copy(folderPath + "/" + cursorArrayList[f], folderPath + "/here/");
+                    }
+                }
+
+            }
+            for (int K = 0; K < cursorArrayList.Count; K++)
+            {
+                if (cursorArrayList[K] == string.Empty)
+                {
+                    allCheckLanguageName.Add(cursorArrayList[K]);
+                    continue;
+                }
+                if (!IsHanZi(cursorArrayList[K].ToString()[0].ToString()))
+                {
+                    allCheckLanguageName.Add(cursorArrayList[K]);
+                }
+                else
+                {
+                    for (int L = 0; L < allCursor.Length; L++)
+                    {
+                        if (allCursor[L].Contains(GetName(cursorArrayList[K].ToString())))
+                        {
+                            allCheckLanguageName.Add(allCursor[L].Substring(0, allCursor[L].IndexOf("/")) + 1);
+                        }
+                    }
+                }
+
+            }
+
             if (lackNumber == 0)
             {
                 if (en_language)
@@ -121,7 +202,13 @@ namespace CursorTool
             }
 
         }
+        private static bool IsHanZi(string ch)
+        {
+            byte[] byte_len = System.Text.Encoding.Default.GetBytes(ch);
+            if (byte_len.Length == 3) { return true; }
 
+            return false;
+        }
         private void selectFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -139,6 +226,18 @@ namespace CursorTool
             englishToolStripMenuItem.Text = "English  √";
             中文ToolStripMenuItem.Text = "中文";
             SwitchLanguage();
+        }
+
+        private string GetName(string name)
+        {
+            if (name.EndsWith(".ani"))
+            {
+                return name.Replace(".ani", " ").Trim();
+            }
+            else
+            {
+                return name.Replace(".cur", " ").Trim();
+            }
         }
 
         private void 中文ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -251,9 +350,9 @@ namespace CursorTool
                         }
                         else
                         {
-                          if(C == cursorArrayList.Count - 1)
+                            if (C == cursorArrayList.Count - 1)
                             {
-                                baseTxt[I] =string.Empty;
+                                baseTxt[I] = string.Empty;
                                 elementNumberTwo++;
                             }
                         }
@@ -285,7 +384,7 @@ namespace CursorTool
         }
         public void CreateInfFile()
         {
-            System.IO.File.WriteAllLines($"{folderPath}\\this.inf", baseTxt);
+            System.IO.File.WriteAllLines($"{folderPath}\\右键安装.inf", baseTxt);
             if (en_language)
             {
                 MessageBox.Show("Sucess！");
@@ -297,6 +396,15 @@ namespace CursorTool
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void listBox1_DragLeave(object sender, EventArgs e)
         {
 
         }

@@ -156,7 +156,7 @@
     <value>Start</value>
   </data>
   <data name="selectFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 32</value>
+    <value>224, 32</value>
   </data>
   <data name="selectFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>Select Folder</value>
@@ -188,7 +188,7 @@
   <data name="button1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAYAAACIV4iNAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAAbE9JREFUeF7t3Qu0bVddHvC0trZWq/gC5eXu5XK9XmK4xEuIGEKElEcIATUiYmSI
+        DAAACwwBP0AiyAAAbE9JREFUeF7t3Qu0bVddHvC0trZWq/gC5eXu5XK9XmK4xEuIGEKElEcIATUiYmSI
         IgSMyiNQyFAGIUYUwcdAihDCowhIYniIiDGA0ogIUTCGECGEJECIlFJEtJRSvF2/7fku/0znWnufe87J
         yU32GeMbc6655pr/5zfnXGuvs/dh+/fvX2GFFW4i6DausMIK24Nu4worrLA96DausMIK24Nu4worrLA9
         6DausMIK24Nu4worrLA96DausMIK24Nu4worrLA96DausMIK24Nu4worrLA96DausMIK24Nu4worrLA9
@@ -727,7 +727,7 @@
     <value>True</value>
   </data>
   <data name="labelTheme.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 193</value>
+    <value>267, 117</value>
   </data>
   <data name="labelTheme.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 20</value>
