@@ -139,8 +139,8 @@ namespace CursorTool
                 }
             }
             if (System.IO.Directory.Exists(folderPath + "/here"))
-            {
-                System.IO.Directory.Delete(folderPath + "/here");
+            {               
+                System.IO.Directory.Delete(folderPath + "/here",true);
             }
             System.IO.Directory.CreateDirectory(folderPath + "/here");
             for (int f = 0; f < cursorArrayList.Count; f++)
@@ -149,31 +149,20 @@ namespace CursorTool
                 {
                     if (!IsHanZi(cursorArrayList[f].ToString()[0].ToString()))
                     {
-                        File.Copy(folderPath + "/" + cursorArrayList[f], folderPath + "/here/");
+                        File.Copy(folderPath + "/" + cursorArrayList[f], folderPath + "/here/"+ cursorArrayList[f]);
                     }
-                }
-
-            }
-            for (int K = 0; K < cursorArrayList.Count; K++)
-            {
-                if (cursorArrayList[K] == string.Empty)
-                {
-                    allCheckLanguageName.Add(cursorArrayList[K]);
-                    continue;
-                }
-                if (!IsHanZi(cursorArrayList[K].ToString()[0].ToString()))
-                {
-                    allCheckLanguageName.Add(cursorArrayList[K]);
-                }
-                else
-                {
-                    for (int L = 0; L < allCursor.Length; L++)
+                    else
                     {
-                        if (allCursor[L].Contains(GetName(cursorArrayList[K].ToString())))
+                        for (int L = 0; L < allCursor.Length; L++)
                         {
-                            allCheckLanguageName.Add(allCursor[L].Substring(0, allCursor[L].IndexOf("/")) + 1);
+                            if (allCursor[L].Contains(GetName(cursorArrayList[f].ToString())))
+                            {
+                                File.Copy(folderPath + "/" + cursorArrayList[f], folderPath + "/here/"+
+                                    (cursorArrayList[f].ToString().Replace(GetName(cursorArrayList[f].ToString()), allCursor[L].Substring(0, allCursor[L].IndexOf("/")))).Replace("/"," ").ToString().Trim());
+                            }
                         }
                     }
+
                 }
 
             }
