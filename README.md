@@ -21,7 +21,7 @@ This tool is for make cursor inf
 
 ![image](https://user-images.githubusercontent.com/98207975/176380894-4ab6711b-ecac-4878-8f2b-24ba21ec3833.png)
 
-
+2.如果您已经应用了鼠标主题，但是在控制面板更改指针大小后又变回了原来的主题。这个是正常现象，每个电脑均有此情况，只需要更改大小后去鼠标对桌面右键->个性化->主题->鼠标光标换回即可。
 
 
 
