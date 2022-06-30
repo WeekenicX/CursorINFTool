@@ -55,6 +55,7 @@ namespace CursorTool
             {
                 FileArrayList.Clear();
             }
+
             listBox1.Items.Clear();
             lackNumber = 0;
             for (int i = 0; i < allFile.Length; i++)
@@ -68,7 +69,24 @@ namespace CursorTool
                         {
                             if (allCursor[R].Contains(noNameFile))
                             {
-                                cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
+                                if (!IsHanZi(noNameFile[0].ToString()))
+                                {
+                                    cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
+                                    allCheckLanguageName.Add((allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1)));
+                                }
+                                else
+                                {
+                                    allCheckLanguageName.Add((allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1)));
+                                    string fileName = allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1);
+                                    for (int V = 0; V < allCursor.Length; V++)
+                                    {
+                                        if (allCursor[V].Contains(GetName(fileName)))
+                                        {
+                                            fileName = fileName.Replace(GetName(fileName), allCursor[V].Substring(0, allCursor[V].IndexOf("/")).Replace("/", " ").ToString().Trim());
+                                            cursorArrayList.Add(fileName);
+                                        }
+                                    }
+                                }
                                 break;
                             }
                             else
@@ -139,26 +157,26 @@ namespace CursorTool
                 }
             }
             if (System.IO.Directory.Exists(folderPath + "/here"))
-            {               
-                System.IO.Directory.Delete(folderPath + "/here",true);
+            {
+                System.IO.Directory.Delete(folderPath + "/here", true);
             }
             System.IO.Directory.CreateDirectory(folderPath + "/here");
-            for (int f = 0; f < cursorArrayList.Count; f++)
+            for (int f = 0; f < allCheckLanguageName.Count; f++)
             {
-                if (cursorArrayList[f] != string.Empty)
+                if (allCheckLanguageName[f] != string.Empty)
                 {
-                    if (!IsHanZi(cursorArrayList[f].ToString()[0].ToString()))
+                    if (!IsHanZi(allCheckLanguageName[f].ToString()[0].ToString()))
                     {
-                        File.Copy(folderPath + "/" + cursorArrayList[f], folderPath + "/here/"+ cursorArrayList[f]);
+                        File.Copy(folderPath + "/" + allCheckLanguageName[f], folderPath + "/here/" + allCheckLanguageName[f]);
                     }
                     else
                     {
                         for (int L = 0; L < allCursor.Length; L++)
                         {
-                            if (allCursor[L].Contains(GetName(cursorArrayList[f].ToString())))
+                            if (allCursor[L].Contains(GetName(allCheckLanguageName[f].ToString())))
                             {
-                                File.Copy(folderPath + "/" + cursorArrayList[f], folderPath + "/here/"+
-                                    (cursorArrayList[f].ToString().Replace(GetName(cursorArrayList[f].ToString()), allCursor[L].Substring(0, allCursor[L].IndexOf("/")))).Replace("/"," ").ToString().Trim());
+                                File.Copy(folderPath + "/" + allCheckLanguageName[f], folderPath + "/here/" +
+                                    (allCheckLanguageName[f].ToString().Replace(GetName(allCheckLanguageName[f].ToString()), allCursor[L].Substring(0, allCursor[L].IndexOf("/")))).Replace("/", " ").ToString().Trim());
                             }
                         }
                     }
@@ -175,7 +193,7 @@ namespace CursorTool
                 }
                 else
                 {
-                    lackLabel.Text = "恭喜你，现在可以进行生成inf";
+                    lackLabel.Text = "现在可以开始生成inf";
                 }
             }
             else
@@ -186,11 +204,12 @@ namespace CursorTool
                 }
                 else
                 {
-                    lackLabel.Text = "您缺少:" + lackNumber;
+                    lackLabel.Text = "您缺少" + lackNumber;
                 }
             }
 
         }
+
         private static bool IsHanZi(string ch)
         {
             byte[] byte_len = System.Text.Encoding.Default.GetBytes(ch);
@@ -296,7 +315,15 @@ namespace CursorTool
             {
                 if (baseTxt[I] == "element" + elementNumber)
                 {
-                    baseTxt[I] = baseTxt[I].Replace($"element{elementNumber}", cursorArrayList[elementNumber - 1].ToString());
+                    if (elementNumber - 1 < cursorArrayList.Count)
+                    {
+                        baseTxt[I] = baseTxt[I].Replace($"element{elementNumber}", cursorArrayList[elementNumber - 1].ToString());
+                        elementNumber++;
+                    }
+                    else
+                    {
+                        baseTxt[I] = string.Empty;
+                    }
                     elementNumber++;
                 }
                 switch (elementNumberTwo)
@@ -357,6 +384,7 @@ namespace CursorTool
         {
             if (folderPath != null)
             {
+                cursorArrayList.Clear();
                 CheckFile(folderPath);
             }
         }
@@ -373,7 +401,7 @@ namespace CursorTool
         }
         public void CreateInfFile()
         {
-            System.IO.File.WriteAllLines($"{folderPath}\\右键安装.inf", baseTxt);
+            System.IO.File.WriteAllLines($"{folderPath+"/here"}\\右键安装.inf", baseTxt);
             if (en_language)
             {
                 MessageBox.Show("Sucess！");
