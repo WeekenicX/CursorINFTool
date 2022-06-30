@@ -1,0 +1,55 @@
+[Version]
+signature="$CHICAGO$"
+
+[DefaultInstall]
+CopyFiles = Scheme.Cur, Scheme.Txt
+AddReg    = Scheme.Reg
+
+[DestinationDirs]
+Scheme.Cur = 10,"%CUR_DIR%"
+Scheme.Txt = 10,"%CUR_DIR%"
+
+[Scheme.Reg]
+HKCU,"Control Panel\Cursors\Schemes","%SCHEME_NAME%",,"%10%\%CUR_DIR%\%pointer%,%10%\%CUR_DIR%\%help%,%10%\%CUR_DIR%\%work%,%10%\%CUR_DIR%\%busy%,%10%\%CUR_DIR%\%cross%,%10%\%CUR_DIR%\%Text%,%10%\%CUR_DIR%\%Hand%,%10%\%CUR_DIR%\%unavailable%,%10%\%CUR_DIR%\%Vert%,%10%\%CUR_DIR%\%Horz%,%10%\%CUR_DIR%\%Dgn1%,%10%\%CUR_DIR%\%Dgn2%,%10%\%CUR_DIR%\%move%,%10%\%CUR_DIR%\%alternate%,%10%\%CUR_DIR%\%link%,%10%\%CUR_DIR%\%loc%,%10%\%CUR_DIR%\%person%"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Runonce\Setup\","",,"rundll32.exe shell32.dll,Control_RunDLL main.cpl,,1"
+
+[Scheme.Cur]
+element1
+element2
+element3
+element4
+element5
+element6
+element7
+element8
+element9
+element10
+element11
+element12
+element13
+element14
+element15
+element16
+element17
+
+
+[Strings]
+CUR_DIR       = "Cursors\elementName"
+SCHEME_NAME   = "elementName"
+pointer       = "element1st"
+help          = "element2nd"
+work          = "element3th"
+busy          = "element4th"
+text          = "element5th"
+unavailable   = "element6th"
+vert          = "element7th"
+horz          = "element8th"
+dgn1          = "element9th"
+dgn2          = "element10th"
+move          = "element11th"
+link          = "element12th"
+cross         = "element13th"
+hand          = "element14th"
+alternate     = "element15th"
+loc      = "element16th"
+person = "element17th"
