@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing.Imaging;
 
 namespace CursorTool
 {
@@ -40,7 +41,7 @@ namespace CursorTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
         /// <summary>
         /// Find cursor you lack
@@ -380,6 +381,54 @@ namespace CursorTool
             elementNumber = 0;
         }
 
+        public static bool ConvertImageToIcon(string origin, string destination, Size iconSize)
+        {
+            if (iconSize.Width > 255 || iconSize.Height > 255)
+            {
+                return false;
+            }
+            Image image = new Bitmap(new Bitmap(origin), iconSize); //先读取已有的图片为bitmap，并缩放至设定大小
+            MemoryStream bitMapStream = new MemoryStream(); //存原图的内存流
+            MemoryStream iconStream = new MemoryStream(); //存图标的内存流
+            image.Save(bitMapStream, ImageFormat.Png); //将原图读取为png格式并存入原图内存流
+            BinaryWriter iconWriter = new BinaryWriter(iconStream); //新建二进制写入器以写入目标图标内存流
+            /**
+             * 下面是根据原图信息，进行文件头写入
+             */
+            iconWriter.Write((short)0);
+            iconWriter.Write((short)1);
+            iconWriter.Write((short)1);
+            iconWriter.Write((byte)image.Width);
+            iconWriter.Write((byte)image.Height);
+            iconWriter.Write((short)0);
+            iconWriter.Write((short)0);
+            iconWriter.Write((short)32);
+            iconWriter.Write((int)bitMapStream.Length);
+            iconWriter.Write(22);
+            //写入图像体至目标图标内存流
+            iconWriter.Write(bitMapStream.ToArray());
+            //保存流，并将流指针定位至头部以Icon对象进行读取输出为文件
+            iconWriter.Flush();
+            iconWriter.Seek(0, SeekOrigin.Begin);
+            if (System.IO.File.Exists(destination))
+            {
+                System.IO.Directory.CreateDirectory(destination);
+            }
+            Stream iconFileStream = new FileStream(destination, FileMode.Create);
+            Icon icon = new Icon(iconStream);
+            icon.Save(iconFileStream); //储存图像
+            /**
+             * 下面开始释放资源
+             */
+            iconFileStream.Close();
+            iconWriter.Close();
+            iconStream.Close();
+            bitMapStream.Close();
+            icon.Dispose();
+            image.Dispose();
+            return File.Exists(destination);
+        }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (folderPath != null)
@@ -399,6 +448,7 @@ namespace CursorTool
             ReplaceElement();
             CreateInfFile();
         }
+
         public void CreateInfFile()
         {
             System.IO.File.WriteAllLines($"{folderPath+"/here"}\\右键安装.inf", baseTxt);
@@ -424,6 +474,16 @@ namespace CursorTool
         private void listBox1_DragLeave(object sender, EventArgs e)
         {
 
+        }
+
+        private void iCOReplaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "png图片文件|*.png|jpg图片文件|*.jpg";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                ConvertImageToIcon(System.IO.Path.GetFullPath(dialog.FileName), System.IO.Path.GetFullPath(dialog.FileName).Substring(0, System.IO.Path.GetFullPath(dialog.FileName).LastIndexOf("\\"))+"\\YourICON.ico", new Size(128, 128));
+            }
         }
     }
 }

@@ -41,6 +41,8 @@
             this.buttonMake = new System.Windows.Forms.Button();
             this.textBoxTheme = new System.Windows.Forms.TextBox();
             this.labelTheme = new System.Windows.Forms.Label();
+            this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iCOReplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +65,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
-            this.languageToolStripMenuItem});
+            this.languageToolStripMenuItem,
+            this.otherToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -124,6 +127,19 @@
             resources.ApplyResources(this.labelTheme, "labelTheme");
             this.labelTheme.Name = "labelTheme";
             // 
+            // otherToolStripMenuItem
+            // 
+            resources.ApplyResources(this.otherToolStripMenuItem, "otherToolStripMenuItem");
+            this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.iCOReplaceToolStripMenuItem});
+            this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
+            // 
+            // iCOReplaceToolStripMenuItem
+            // 
+            this.iCOReplaceToolStripMenuItem.Name = "iCOReplaceToolStripMenuItem";
+            resources.ApplyResources(this.iCOReplaceToolStripMenuItem, "iCOReplaceToolStripMenuItem");
+            this.iCOReplaceToolStripMenuItem.Click += new System.EventHandler(this.iCOReplaceToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -159,5 +175,7 @@
         private Button buttonMake;
         private TextBox textBoxTheme;
         private Label labelTheme;
+        private ToolStripMenuItem otherToolStripMenuItem;
+        private ToolStripMenuItem iCOReplaceToolStripMenuItem;
     }
 }
