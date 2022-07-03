@@ -421,7 +421,7 @@ namespace CursorTool
             iconWriter.Seek(0, SeekOrigin.Begin);
             if (System.IO.File.Exists(destination))
             {
-                System.IO.Directory.CreateDirectory(destination);
+                System.IO.File.Delete(destination);
             }
             Stream iconFileStream = new FileStream(destination, FileMode.Create);
             Icon icon = new Icon(iconStream);
@@ -491,14 +491,56 @@ namespace CursorTool
             dialog.Filter = "png图片文件|*.png|jpg图片文件|*.jpg";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                ConvertImageToIcon(System.IO.Path.GetFullPath(dialog.FileName), System.IO.Path.GetFullPath(dialog.FileName).Substring(0, System.IO.Path.GetFullPath(dialog.FileName).LastIndexOf("\\"))+"\\YourICON.ico", new Size(128, 128));
+                ConvertImageToIcon(System.IO.Path.GetFullPath(dialog.FileName), System.IO.Path.GetFullPath(dialog.FileName).Substring(0, System.IO.Path.GetFullPath(dialog.FileName).LastIndexOf("\\"))+"\\YourICON.ico", new Size(64, 64));
+            }
+            if (!en_language)
+            {
+                MessageBox.Show("生成完毕");
+            }
+            else
+            {
+                MessageBox.Show("Generate Success！");
             }
         }
 
         private void genrateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            createICOInf();
+        }
+        public void createICOInf()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "ico图标文件|*.ico";
+            string fileName = "";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fileName = dialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+            string icoFolderName = fileName.Substring(0, fileName.LastIndexOf("\\"));
             string headerText = "[autorun]";
-            string bodyText = "ICON=";
+            string bodyText = "ICON=" + fileName.Substring(fileName.LastIndexOf("\\") + 1);
+            string[] infTexts = new string[2];
+            infTexts[0] = headerText;
+            infTexts[1] = bodyText;
+            if (System.IO.Directory.Exists(icoFolderName + "/here"))
+            {
+                System.IO.Directory.Delete(icoFolderName + "/here", true);
+            }
+            System.IO.Directory.CreateDirectory(icoFolderName + "/here");
+            File.Copy(fileName, icoFolderName+"/here"+"\\" + fileName.Substring(fileName.LastIndexOf("\\") + 1));
+            System.IO.File.WriteAllLines($"{fileName.Replace(fileName.Substring(fileName.LastIndexOf("\\"))," ").Trim() + "/here"}\\autorun.inf", infTexts);
+            if (en_language)
+            {
+                MessageBox.Show("Sucess！");
+            }
+            else
+            {
+                MessageBox.Show("成功");
+            }
         }
     }
 }
