@@ -3,12 +3,11 @@ This tool is for make cursor inf
 
 如何使用?
 
-
 1.切换语言(Language->中文)*->点击开始->选择您包含指针的文件夹(图片所用素材已经经过作者同意)
 
 ![image](https://user-images.githubusercontent.com/98207975/176368142-0445c14f-8500-4d3e-a136-a46180720dfa.png)
 
-2.确保您的指针命规则与Windows指针的命名规则一致(如果不同例如上图uirt (1)，uirt (2),安装文件则不会安装命名错误的指针)
+2.确保您的指针命名规则与Windows指针的命名规则一致(如果不同例如上图uirt (1)，uirt (2),安装文件则不会安装命名错误的指针)
 
 ![image](https://user-images.githubusercontent.com/98207975/176363102-140215b1-ff0b-4198-be61-c4fc4a8e08d8.png)
 
