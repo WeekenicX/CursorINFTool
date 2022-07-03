@@ -9,7 +9,7 @@ namespace CursorTool
         public ArrayList cursorArrayList = new ArrayList();
         public ArrayList FileArrayList = new ArrayList();
         public int lackNumber;
-        public bool en_language = true;
+        public bool en_language;
         public string folderPath;
         public string basePath = "base.txt";
         public string[] baseTxt;
@@ -18,14 +18,14 @@ namespace CursorTool
         {
             "alternate/候选",
             "busy/忙",
-            "cross/精准选择",
+            "cross/精确选择",
             "dgn1/沿对角线调整大小 1",
             "dgn2/沿对角线调整大小 2",
             "handwriting/手写",
             "help/帮助选择",
             "horz/水平调整大小",
             "link/链接选择",
-            "loc/位置大小",
+            "loc/位置选择",
             "move/移动",
             "pointer/正常选择",
             "person/个人选择",
@@ -41,7 +41,7 @@ namespace CursorTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            SwitchLanguage(en_language);
         }
         /// <summary>
         /// Find cursor you lack
@@ -234,7 +234,7 @@ namespace CursorTool
             en_language = true;
             englishToolStripMenuItem.Text = "English  √";
             中文ToolStripMenuItem.Text = "中文";
-            SwitchLanguage();
+            SwitchLanguage(en_language);
         }
 
         private string GetName(string name)
@@ -254,14 +254,14 @@ namespace CursorTool
             en_language = false;
             englishToolStripMenuItem.Text = "English";
             中文ToolStripMenuItem.Text = "中文   √";
-            SwitchLanguage();
+            SwitchLanguage(en_language);
         }
         /// <summary>
         /// Switch Language
         /// </summary>
-        public void SwitchLanguage()
+        public void SwitchLanguage(bool LanStatus)
         {
-            if (en_language)
+            if (LanStatus)
             {
                 startToolStripMenuItem.Text = "Start";
                 selectFolderToolStripMenuItem.Text = "Select Folder";
@@ -280,16 +280,20 @@ namespace CursorTool
                     }
 
                 }
-
+                otherToolStripMenuItem.Text = "other";
+                iCOReplaceToolStripMenuItem.Text = "ICO-Replace";
+                genrateToolStripMenuItem.Text = "Generate ICO INF";
 
             }
             else
             {
                 startToolStripMenuItem.Text = "开始";
                 selectFolderToolStripMenuItem.Text = "选择文件夹";
-                languageToolStripMenuItem.Text = "语言";
                 labelTheme.Text = "主题名称(建议为英文)";
                 buttonMake.Text = "生成";
+                otherToolStripMenuItem.Text = "其他";
+                iCOReplaceToolStripMenuItem.Text = "替换生成ico文件";
+                genrateToolStripMenuItem.Text = "生成ico-ing文件";
                 if (lackLabel.Text.StartsWith('C') || lackLabel.Text.StartsWith('Y'))
                 {
                     if (lackLabel.Text.StartsWith('C'))
@@ -301,6 +305,10 @@ namespace CursorTool
                         lackLabel.Text = "您缺少:" + lackNumber;
                     }
 
+                }
+                else
+                {
+                    lackLabel.Text = "未选择";
                 }
             }
         }
@@ -324,8 +332,9 @@ namespace CursorTool
                     else
                     {
                         baseTxt[I] = string.Empty;
+                        elementNumber++;
                     }
-                    elementNumber++;
+
                 }
                 switch (elementNumberTwo)
                 {
@@ -484,6 +493,12 @@ namespace CursorTool
             {
                 ConvertImageToIcon(System.IO.Path.GetFullPath(dialog.FileName), System.IO.Path.GetFullPath(dialog.FileName).Substring(0, System.IO.Path.GetFullPath(dialog.FileName).LastIndexOf("\\"))+"\\YourICON.ico", new Size(128, 128));
             }
+        }
+
+        private void genrateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string headerText = "[autorun]";
+            string bodyText = "ICON=";
         }
     }
 }

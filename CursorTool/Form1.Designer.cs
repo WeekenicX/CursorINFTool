@@ -37,12 +37,13 @@
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.中文ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iCOReplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.genrateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonMake = new System.Windows.Forms.Button();
             this.textBoxTheme = new System.Windows.Forms.TextBox();
             this.labelTheme = new System.Windows.Forms.Label();
-            this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iCOReplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +104,26 @@
             resources.ApplyResources(this.中文ToolStripMenuItem, "中文ToolStripMenuItem");
             this.中文ToolStripMenuItem.Click += new System.EventHandler(this.中文ToolStripMenuItem_Click);
             // 
+            // otherToolStripMenuItem
+            // 
+            resources.ApplyResources(this.otherToolStripMenuItem, "otherToolStripMenuItem");
+            this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.iCOReplaceToolStripMenuItem,
+            this.genrateToolStripMenuItem});
+            this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
+            // 
+            // iCOReplaceToolStripMenuItem
+            // 
+            this.iCOReplaceToolStripMenuItem.Name = "iCOReplaceToolStripMenuItem";
+            resources.ApplyResources(this.iCOReplaceToolStripMenuItem, "iCOReplaceToolStripMenuItem");
+            this.iCOReplaceToolStripMenuItem.Click += new System.EventHandler(this.iCOReplaceToolStripMenuItem_Click);
+            // 
+            // genrateToolStripMenuItem
+            // 
+            this.genrateToolStripMenuItem.Name = "genrateToolStripMenuItem";
+            resources.ApplyResources(this.genrateToolStripMenuItem, "genrateToolStripMenuItem");
+            this.genrateToolStripMenuItem.Click += new System.EventHandler(this.genrateToolStripMenuItem_Click);
+            // 
             // button1
             // 
             resources.ApplyResources(this.button1, "button1");
@@ -126,19 +147,6 @@
             // 
             resources.ApplyResources(this.labelTheme, "labelTheme");
             this.labelTheme.Name = "labelTheme";
-            // 
-            // otherToolStripMenuItem
-            // 
-            resources.ApplyResources(this.otherToolStripMenuItem, "otherToolStripMenuItem");
-            this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iCOReplaceToolStripMenuItem});
-            this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
-            // 
-            // iCOReplaceToolStripMenuItem
-            // 
-            this.iCOReplaceToolStripMenuItem.Name = "iCOReplaceToolStripMenuItem";
-            resources.ApplyResources(this.iCOReplaceToolStripMenuItem, "iCOReplaceToolStripMenuItem");
-            this.iCOReplaceToolStripMenuItem.Click += new System.EventHandler(this.iCOReplaceToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -177,5 +185,6 @@
         private Label labelTheme;
         private ToolStripMenuItem otherToolStripMenuItem;
         private ToolStripMenuItem iCOReplaceToolStripMenuItem;
+        private ToolStripMenuItem genrateToolStripMenuItem;
     }
 }

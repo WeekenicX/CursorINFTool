@@ -141,13 +141,13 @@
     <value>False</value>
   </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 32</value>
+    <value>197, 32</value>
   </data>
   <data name="englishToolStripMenuItem.Text" xml:space="preserve">
     <value>English   √</value>
   </data>
   <data name="中文ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 32</value>
+    <value>197, 32</value>
   </data>
   <data name="中文ToolStripMenuItem.Text" xml:space="preserve">
     <value>中文</value>
@@ -165,16 +165,22 @@
     <value>False</value>
   </data>
   <data name="iCOReplaceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 32</value>
+    <value>264, 32</value>
   </data>
   <data name="iCOReplaceToolStripMenuItem.Text" xml:space="preserve">
     <value>ICO-Replace</value>
+  </data>
+  <data name="genrateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 32</value>
+  </data>
+  <data name="genrateToolStripMenuItem.Text" xml:space="preserve">
+    <value>Generate ICO INF</value>
   </data>
   <data name="otherToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei UI, 12pt</value>
   </data>
   <data name="otherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 40</value>
+    <value>92, 40</value>
   </data>
   <data name="otherToolStripMenuItem.Text" xml:space="preserve">
     <value>Other</value>
@@ -745,7 +751,7 @@
     <value>True</value>
   </data>
   <data name="labelTheme.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 119</value>
+    <value>315, 114</value>
   </data>
   <data name="labelTheme.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 20</value>
@@ -5007,6 +5013,12 @@
     <value>iCOReplaceToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;iCOReplaceToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;genrateToolStripMenuItem.Name" xml:space="preserve">
+    <value>genrateToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;genrateToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
