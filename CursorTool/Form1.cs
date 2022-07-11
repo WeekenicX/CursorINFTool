@@ -14,6 +14,7 @@ namespace CursorTool
         public string basePath = "base.txt";
         public string[] baseTxt;
         public ArrayList allCheckLanguageName = new ArrayList();
+        public string noNameFile;
         public string[] allCursor = new string[]
         {
             "alternate/∫Ú—°",
@@ -63,8 +64,16 @@ namespace CursorTool
             {
                 if (allFile[i].EndsWith("ani") || allFile[i].EndsWith("cur"))
                 {
-                    string noNameFile = allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1).Replace(".ani", " ").ToString().Trim();
-                    if (allFile[i].EndsWith(".ani"))
+                    if (allFile[i].EndsWith("ani"))
+                    {
+                         noNameFile = allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1).Replace(".ani", " ").ToString().Trim();
+                    }
+                    else
+                    {
+                         noNameFile = allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1).Replace(".cur", " ").ToString().Trim();
+                    }
+
+                    if (allFile[i].EndsWith(".ani") || allFile[i].EndsWith(".cur"))
                     {
                         for (int R = 0; R < allCursor.Length; R++)
                         {
@@ -99,27 +108,27 @@ namespace CursorTool
                             }
                         }
                     }
-                    if (allFile[i].EndsWith(".cur"))
-                    {
-                        if (allFile[i].EndsWith(".cur"))
-                        {
-                            for (int R = 0; R < allCursor.Length; R++)
-                            {
-                                if (allCursor[R].Contains(noNameFile))
-                                {
-                                    cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
-                                    break;
-                                }
-                                else
-                                {
-                                    if (R == allCursor.Length - 1)
-                                    {
-                                        cursorArrayList.Add(string.Empty);
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    //if (allFile[i].EndsWith(".cur"))
+                    //{
+                    //    if (allFile[i].EndsWith(".cur"))
+                    //    {
+                    //        for (int R = 0; R < allCursor.Length; R++)
+                    //        {
+                    //            if (allCursor[R].Contains(noNameFile))
+                    //            {
+                    //                cursorArrayList.Add(allFile[i].Substring(allFile[i].ToString().LastIndexOf("\\") + 1));
+                    //                break;
+                    //            }
+                    //            else
+                    //            {
+                    //                if (R == allCursor.Length - 1)
+                    //                {
+                    //                    cursorArrayList.Add(string.Empty);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
                 }
             }
